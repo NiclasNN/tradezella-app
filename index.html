@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tradezella-replika</title>
+  <meta name="theme-color" content="#1d1a4b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Journal" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="icon" href="./icon-192.png" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo"><span class="logo-mark">Z</span><span class="logo-text">TRADEZELLA<small>replika</small></span></div>
+    <button class="btn-add" id="btn-add-trade">＋ Lägg till trade</button>
+    <button class="btn-missed" id="btn-missed">Missade en signal</button>
+    <nav class="nav">
+      <a href="#/oversikt" data-route="oversikt"><i>▦</i> Översikt</a>
+      <a href="#/trades" data-route="trades"><i>▥</i> Trades</a>
+      <a href="#/dagbok" data-route="dagbok"><i>▤</i> Journal</a>
+      <a href="#/notebook" data-route="notebook"><i>✎</i> Anteckningar</a>
+      <a href="#/playbook" data-route="playbook"><i>◎</i> Strategi</a>
+      <a href="#/rapporter" data-route="rapporter"><i>▮</i> Rapporter</a>
+      <div class="nav-sep"></div>
+      <a href="#/installningar" data-route="installningar"><i>⚙</i> Inställningar</a>
+    </nav>
+    <div class="user-chip"><span class="avatar">N</span><span>Niclas</span><button class="btn small ghost hidden" id="btn-logout" title="Logga ut" style="margin-left:auto;color:#cfcaf5">Logga ut</button></div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="logo-mark mobile-only" style="width:26px;height:26px;font-size:13px">Z</span>
+        <h1 id="page-title">Översikt</h1>
+      </div>
+      <div class="topbar-right">
+        <button class="sync-chip hidden" id="sync-chip" type="button" title="Molnsynk"><i>☁</i><span id="sync-chip-text">Lokalt</span></button>
+        <label class="range-picker">
+          <span class="desktop-only">Period</span>
+          <select id="range-select">
+            <option value="7">Senaste 7 dagarna</option>
+            <option value="30">Senaste 30 dagarna</option>
+            <option value="90">Senaste 90 dagarna</option>
+            <option value="month">Denna månad</option>
+            <option value="year">I år</option>
+            <option value="all">Allt</option>
+          </select>
+        </label>
+        <span class="account-chip desktop-only" id="account-chip">SOLUSDT.P · Manuell journal</span>
+      </div>
+    </header>
+    <main id="view"></main>
+  </div>
+
+  <nav class="bottom-nav mobile-only">
+    <a href="#/oversikt" data-route="oversikt"><i>▦</i><span>Översikt</span></a>
+    <a href="#/trades" data-route="trades"><i>▥</i><span>Trades</span></a>
+    <button class="fab" id="btn-add-trade-mobile" aria-label="Lägg till trade">＋</button>
+    <a href="#/dagbok" data-route="dagbok"><i>▤</i><span>Journal</span></a>
+    <button id="btn-more" aria-label="Mer"><i>⋯</i><span>Mer</span></button>
+  </nav>
+  <div id="more-sheet" class="more-sheet mobile-only hidden">
+    <a href="#/notebook">✎ Anteckningar</a>
+    <a href="#/playbook">◎ Strategi</a>
+    <a href="#/rapporter">▮ Rapporter</a>
+    <a href="#/installningar">⚙ Inställningar</a>
+    <a href="#" id="btn-missed-mobile">Missade en signal</a>
+    <a href="#" id="btn-logout-mobile" class="hidden">Logga ut</a>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast-root"></div>
+
+  <script src="./vendor/lightweight-charts.js"></script>
+  <script src="./engine.js"></script>
+  <script src="./js/core.js"></script>
+  <script src="./js/charts.js"></script>
+  <script src="./js/trades.js"></script>
+  <script src="./js/quick.js"></script>
+  <script src="./js/dashboard.js"></script>
+  <script src="./js/daily.js"></script>
+  <script src="./js/notebook.js"></script>
+  <script src="./js/playbook.js"></script>
+  <script src="./js/reports.js"></script>
+  <script src="./js/settings.js"></script>
+  <script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js");
+  window.LocalApi.ready.then(() => window.App.start());</script>
+</body>
+</html>
