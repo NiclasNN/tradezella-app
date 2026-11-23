@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tradezella</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#18082c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Journal" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="icon" href="./icon-192.png" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- mörk ram: toppraden och ikonlisten ligger runt det ljusa arket (meny + sida) -->
+  <header class="topframe">
+    <button class="tf-btn desktop-only" id="btn-menu" type="button" aria-label="Visa eller dölj menyn" title="Visa eller dölj menyn">
+      <svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="logo" href="#/oversikt" aria-label="Till översikten"><span class="logo-mark">Z</span><span class="logo-text">TRADE<b>ZELLA</b></span></a>
+    <span class="grow"></span>
+    <button class="sync-chip hidden" id="sync-chip" type="button" title="Molnsynk"><i>☁</i><span id="sync-chip-text">Lokalt</span></button>
+    <button class="btn small ghost hidden" id="btn-logout" title="Logga ut">Logga ut</button>
+    <span class="user-chip" title="Niclas"><span class="avatar">N</span></span>
+  </header>
+
+  <aside class="rail desktop-only" aria-label="Genvägar">
+    <a href="#/oversikt" data-rail="oversikt" title="Översikt"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/></svg></a>
+    <a href="#/trades" data-rail="trades" title="Journal"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></a>
+    <a href="#/dagbok" data-rail="dagbok" title="Dagjournal"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h5M8 17h8"/></svg></a>
+    <a href="#/insikter" data-rail="insikter" title="Insikter"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.4 1 2.5h6c0-1.1.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></a>
+    <span class="grow"></span>
+    <a href="#/installningar" data-rail="installningar" title="Inställningar"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 12h4M12 12h8M4 17h12"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="17" r="2"/></svg></a>
+  </aside>
+
+  <aside class="sidebar">
+    <button class="btn-add" id="btn-add-trade" title="Kortkommando: N · eller klistra in en skärmbild från Bybit (⌘V)"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Lägg till trade <kbd>N</kbd></button>
+    <button class="btn-import hidden" id="btn-import" title="Dra in eller välj en skärmbild av botens Details-sida i Bybit – så loggas allt">Importera skärmbild</button>
+    <nav class="nav">
+      <a href="#/oversikt" data-route="oversikt"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M10 3v18M10 10h11"/></svg>Översikt</a>
+      <a href="#/trades" data-route="trades"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><rect x="7" y="13" width="4" height="4" rx=".6" fill="currentColor" stroke="none"/></svg>Trades</a>
+      <a href="#/notebook" data-route="notebook"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>Anteckningar</a>
+      <a href="#/rapporter" data-route="rapporter"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg>Rapporter</a>
+      <a href="#/playbook" data-route="playbook"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h10a2 2 0 0 1 2 2v16l-7-3-7 3V5a2 2 0 0 1 2-2z"/><path d="m9 9 2 2 4-4"/></svg>Strategi</a>
+      <div class="nav-sep"></div>
+      <a href="#/dagbok" data-route="dagbok"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h5M8 17h8"/></svg>Dagjournal</a>
+      <a href="#/insikter" data-route="insikter"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>Insikter</a>
+      <a href="#/installningar" data-route="installningar"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 12h4M12 12h8M4 17h12M20 17h0"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="17" r="2"/></svg>Inställningar</a>
+    </nav>
+    <button class="btn-missed" id="btn-missed">Missade en signal</button>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="crumb desktop-only">Journal <span aria-hidden="true">›</span></div>
+        <h1 id="page-title">Översikt</h1>
+      </div>
+      <div class="topbar-right">
+        <label class="range-picker">
+          <span class="desktop-only">Period</span>
+          <select id="range-select">
+            <option value="all">Allt</option>
+            <option value="7">Senaste 7 dagarna</option>
+            <option value="30">Senaste 30 dagarna</option>
+            <option value="90">Senaste 90 dagarna</option>
+            <option value="month">Denna månad</option>
+            <option value="year">I år</option>
+          </select>
+        </label>
+        <span class="account-chip desktop-only" id="account-chip">Manuell journal</span>
+      </div>
+    </header>
+    <main id="view"></main>
+  </div>
+
+  <nav class="bottom-nav mobile-only">
+    <a href="#/oversikt" data-route="oversikt"><i><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M10 3v18M10 10h11"/></svg></i><span>Översikt</span></a>
+    <a href="#/trades" data-route="trades"><i><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></i><span>Trades</span></a>
+    <button class="fab" id="btn-add-trade-mobile" aria-label="Lägg till trade">＋</button>
+    <a href="#/dagbok" data-route="dagbok"><i><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h5M8 17h8"/></svg></i><span>Journal</span></a>
+    <button id="btn-more" aria-label="Mer"><i><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg></i><span>Mer</span></button>
+  </nav>
+  <div id="more-sheet" class="more-sheet mobile-only hidden">
+    <a href="#/notebook">Anteckningar</a>
+    <a href="#/playbook">Strategi</a>
+    <a href="#/rapporter">Rapporter</a>
+    <a href="#/insikter">Insikter</a>
+    <a href="#/installningar">Inställningar</a>
+    <a href="#" id="btn-missed-mobile">Missade en signal</a>
+    <a href="#" id="btn-logout-mobile" class="hidden">Logga ut</a>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast-root"></div>
+
+  <script src="./vendor/lightweight-charts.js"></script>
+  <script src="./engine.js"></script>
+  <script src="./js/core.js"></script>
+  <script src="./js/ux.js"></script>
+  <script src="./js/charts.js"></script>
+  <script src="./js/trades.js"></script>
+  <script src="./js/quick.js"></script>
+  <script src="./js/dashboard.js"></script>
+  <script src="./js/daily.js"></script>
+  <script src="./js/notebook.js"></script>
+  <script src="./js/playbook.js"></script>
+  <script src="./js/reports.js"></script>
+  <script src="./js/settings.js"></script>
+  <script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js");
+  window.LocalApi.ready.then(() => window.App.start());</script>
+</body>
+</html>
